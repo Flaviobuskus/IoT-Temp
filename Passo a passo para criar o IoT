@@ -1,0 +1,89 @@
+Passo a Passo para Criar o Sistema de Monitoramento de Temperatura e Umidade IoT
+
+Siga estas etapas para configurar e implementar o sistema IoT descrito:
+1️⃣ Clone ou Baixe o Repositório
+
+    Certifique-se de ter o Git instalado no seu computador.
+    Execute o seguinte comando para clonar o repositório:
+
+git clone https://github.com/seu-usuario/monitoramento-iot.git
+
+Navegue até o diretório clonado:
+
+    cd monitoramento-iot
+
+2️⃣ Configure o Ambiente de Desenvolvimento
+
+    Instale a IDE Arduino.
+    Instale as seguintes bibliotecas via Gerenciador de Bibliotecas:
+        ESP8266WiFi
+        Adafruit MQTT Library
+        DHT Sensor Library
+
+3️⃣ Prepare o Hardware
+
+    Conecte os componentes conforme a tabela abaixo:
+
+Componente	Pino ESP8266	Observação
+Sensor DHT11	D2	Leitura de dados
+LED	D4	Alerta visual
+
+    Siga o diagrama esquemático incluído no repositório (/docs/schematic.png).
+
+4️⃣ Personalize o Código
+
+    Abra o arquivo src/main.ino na IDE Arduino.
+    Atualize as credenciais de Wi-Fi:
+
+const char* WIFI_SSID = "SEU_SSID";
+const char* WIFI_PASSWORD = "SUA_SENHA";
+
+Insira suas credenciais do Adafruit IO:
+
+const char* AIO_USERNAME = "SEU_USUARIO";
+const char* AIO_KEY = "SUA_CHAVE";
+
+Ajuste o limite de temperatura, se necessário:
+
+    const int TEMPERATURE_THRESHOLD = 27; // Limite em °C
+
+5️⃣ Faça o Upload para o ESP8266
+
+    Conecte seu ESP8266 ao computador via cabo USB.
+    Selecione a placa e a porta na IDE Arduino:
+        Placa: NodeMCU 1.0 (ESP-12E Module)
+        Porta: A que corresponde ao ESP8266.
+    Compile e envie o código clicando no botão Upload (seta para a direita).
+
+6️⃣ Teste o Sistema
+
+    Após o upload, abra o Monitor Serial na IDE Arduino para verificar os logs.
+    Certifique-se de que:
+        O dispositivo conecta ao Wi-Fi.
+        Os dados são enviados para os feeds no Adafruit IO.
+        O LED acende quando a temperatura ultrapassa o limite configurado.
+
+7️⃣ Configure os Feeds no Adafruit IO
+
+    Faça login na Adafruit IO.
+    Crie os feeds necessários:
+        Temperature: Para os dados de temperatura.
+        Humidity: Para os dados de umidade.
+        TemperatureAlarm: Para alertas de temperatura.
+    Crie um Painel e adicione widgets para visualizar os dados dos feeds.
+
+8️⃣ Documentação e Uso
+
+    Consulte os arquivos de documentação no diretório /docs:
+        Esquema eletrônico (schematic.png).
+        Diagrama de funcionamento (flowchart.png).
+        Explicações detalhadas em README.md.
+    O sistema é agora funcional e pronto para monitorar temperatura e umidade em tempo real.
+
+🛠️ Dicas e Solução de Problemas
+
+    Sem conexão Wi-Fi: Verifique as credenciais e a força do sinal.
+    Dados não aparecem no Adafruit IO:
+        Certifique-se de que os feeds têm os mesmos nomes no código.
+        Verifique os logs do Monitor Serial para erros de MQTT.
+    Leitura do DHT falhando: Confira o cabeamento e substitua o sensor, se necessário.
